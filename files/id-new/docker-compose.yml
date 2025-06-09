@@ -59,6 +59,7 @@ services:
     volumes:
       - /etc/letsencrypt/live/adaba.openmrs.org:/etc/ssl/certs/
       - /etc/letsencrypt/archive/adaba.openmrs.org:/etc/archive/adaba.openmrs.org
+      - ./clients.cidr:/etc/postfix/clients.cidr
 volumes:
   postgres_data:
     driver: local
