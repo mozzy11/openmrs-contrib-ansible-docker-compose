@@ -54,7 +54,7 @@ else
   eval "${DOCKER_COMPOSE} up -d --no-build ${SERVICE}"
 fi
 
-containers=$(docker-compose ps -q)
+containers=$(eval "${DOCKER_COMPOSE} ps -q")
 n=0
 until [ $n -ge 20 ]
 do
