@@ -33,10 +33,11 @@ services:
     volumes:
       - ./realm-export.json:/opt/keycloak/data/import/realm-export.json
   postfix:
-    image: openmrsinfra/openmrs-id-postfix:staging
+    image: openmrsinfra/openmrs-id-postfix:nightly
     ports:
       - "587:25"
       - "25:25"
+      - "8090:8090"
     healthcheck:
       test: postfix status
     restart: "always"
@@ -56,6 +57,14 @@ services:
       - LDAP_PORT=${LDAP_PORT:-636}
       - LDAP_USER=${LDAP_USER:-ldap}
       - LDAP_BIND_PASSWORD=${LDAP_BIND_PASSWORD:-Ldap123}
+      # IP Updater Configuration
+      - ATLASSIAN_IP_JSON_URL=${ATLASSIAN_IP_JSON_URL:-https://ip-ranges.atlassian.com/}
+      - DATADOG_API_KEY=${DATADOG_API_KEY}
+      - DATADOG_APP_KEY=${DATADOG_APP_KEY}
+      - DATADOG_SITE=${DATADOG_SITE:-datadoghq.com}
+      - IP_CHECK_INTERVAL=${IP_CHECK_INTERVAL:-3600}
+      - HEALTH_PORT=${HEALTH_PORT:-8090}
+      - METRIC_REPORT_INTERVAL=${METRIC_REPORT_INTERVAL:-300}
     volumes:
       - /etc/letsencrypt/live/gode.openmrs.org:/etc/ssl/certs/
       - /etc/letsencrypt/archive/gode.openmrs.org:/etc/archive/gode.openmrs.org
