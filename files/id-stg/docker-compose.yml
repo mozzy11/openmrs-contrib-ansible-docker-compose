@@ -49,7 +49,7 @@ services:
       - POSTFIX_PASSWORD=${POSTFIX_PASSWORD:-Smtpd123}
       - POSTFIX_TLS_CRT_FILENAME=${POSTFIX_SSL_CERT:-fullchain.pem}
       - POSTFIX_TLS_KEY_FILENAME=${POSTFIX_SSL_CERT_KEY:-privkey.pem}
-      - SMTP_SERVER=${SMTP_SERVER:-smtp.mandrillapp.com}
+      - SMTP_SERVER=${SMTP_SERVER:-smtp.server.com}
       - SMTP_PORT=${SMTP_PORT:-587}
       - SMTP_USERNAME=${SMTP_USERNAME:-smtp}
       - SMTP_PASSWORD=${SMTP_PASSWORD:-Smtp123}
