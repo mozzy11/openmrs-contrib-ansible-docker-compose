@@ -7,11 +7,8 @@ FORCE_DESTROY_VOLUMES=${2:-false}
 FORCE_RESTART=${3:-false}
 SERVICE=${4:-''}
 
-DOCKER_COMPOSE="docker-compose"
-result=$(command -pv docker-compose 2>&1 1>/dev/null && echo 0 || echo 1)
-if [ "$result" -ne "0" ]; then
-  DOCKER_COMPOSE="docker compose"
-fi
+
+DOCKER_COMPOSE="docker compose"
 
 cd /root/docker/$ENVIRONMENT
 

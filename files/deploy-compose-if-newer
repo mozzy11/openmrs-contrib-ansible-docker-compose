@@ -7,11 +7,7 @@ FORCE_RESTART=${4:-false}
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-DOCKER_COMPOSE="docker-compose"
-result=$(command -pv docker-compose 2>&1 1>/dev/null && echo 0 || echo 1)
-if [ "$result" -ne "0" ]; then
-  DOCKER_COMPOSE="docker compose"
-fi
+DOCKER_COMPOSE="docker compose"
 
 for ENVIRONMENT in $ENVIRONMENTS; do
   echo "Running environment $ENVIRONMENT"
