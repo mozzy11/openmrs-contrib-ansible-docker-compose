@@ -33,7 +33,7 @@ services:
     volumes:
       - ./realm-export.json:/opt/keycloak/data/import/realm-export.json
   postfix:
-    image: openmrsinfra/openmrs-id-postfix:nightly
+    image: openmrsinfra/openmrs-id-postfix:staging
     ports:
       - "587:25"
       - "25:25"
