@@ -62,12 +62,16 @@ services:
       - DATADOG_API_KEY=${DATADOG_API_KEY}
       - DATADOG_APP_KEY=${DATADOG_APP_KEY}
       - DATADOG_SITE=${DATADOG_SITE:-datadoghq.com}
+      - DATADOG_HOSTNAME=gode.openmrs.org
       - IP_CHECK_INTERVAL=${IP_CHECK_INTERVAL:-3600}
       - HEALTH_PORT=${HEALTH_PORT:-8090}
       - METRIC_REPORT_INTERVAL=${METRIC_REPORT_INTERVAL:-300}
     volumes:
       - /etc/letsencrypt/live/gode.openmrs.org:/etc/ssl/certs/
       - /etc/letsencrypt/archive/gode.openmrs.org:/etc/archive/gode.openmrs.org
+      - ip_updater_logs:/var/logs/ip_updater/
 volumes:
   postgres_data:
+    driver: local
+  ip_updater_logs:
     driver: local
