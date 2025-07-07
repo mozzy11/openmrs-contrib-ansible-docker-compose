@@ -37,6 +37,7 @@ services:
     ports:
       - "587:25"
       - "25:25"
+      - "8090:8090"
     healthcheck:
       test: postfix status
     restart: "always"
@@ -48,7 +49,7 @@ services:
       - POSTFIX_PASSWORD=${POSTFIX_PASSWORD:-password}
       - POSTFIX_TLS_CRT_FILENAME=${POSTFIX_SSL_CERT:-fullchain.pem}
       - POSTFIX_TLS_KEY_FILENAME=${POSTFIX_SSL_CERT_KEY:-privkey.pem}
-      - SMTP_SERVER=${SMTP_SERVER:-smtp.mandrillapp.com}
+      - SMTP_SERVER=${SMTP_SERVER:-smtp.server.com}
       - SMTP_PORT=${SMTP_PORT:-587}
       - SMTP_USERNAME=${SMTP_USERNAME:-smtp}
       - SMTP_PASSWORD=${SMTP_PASSWORD:-Smtp123}
@@ -56,10 +57,21 @@ services:
       - LDAP_PORT=${LDAP_PORT:-636}
       - LDAP_USER=${LDAP_USER:-ldap}
       - LDAP_BIND_PASSWORD=${LDAP_BIND_PASSWORD:-Ldap123}
+      # IP Updater Configuration
+      - ATLASSIAN_IP_JSON_URL=${ATLASSIAN_IP_JSON_URL:-https://ip-ranges.atlassian.com/}
+      - DATADOG_API_KEY=${DATADOG_API_KEY}
+      - DATADOG_APP_KEY=${DATADOG_APP_KEY}
+      - DATADOG_SITE=${DATADOG_SITE:-datadoghq.com}
+      - DATADOG_HOSTNAME=gode.openmrs.org
+      - IP_CHECK_INTERVAL=${IP_CHECK_INTERVAL:-3600}
+      - HEALTH_PORT=${HEALTH_PORT:-8090}
+      - METRIC_REPORT_INTERVAL=${METRIC_REPORT_INTERVAL:-300}
     volumes:
       - /etc/letsencrypt/live/adaba.openmrs.org:/etc/ssl/certs/
       - /etc/letsencrypt/archive/adaba.openmrs.org:/etc/archive/adaba.openmrs.org
-      - ./clients.cidr:/etc/postfix/clients.cidr
+      - ip_updater_logs:/var/log/ip_updater/
 volumes:
   postgres_data:
+    driver: local
+  ip_updater_logs:
     driver: local
