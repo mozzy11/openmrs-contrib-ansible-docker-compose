@@ -69,7 +69,7 @@ services:
     volumes:
       - /etc/letsencrypt/live/gode.openmrs.org:/etc/ssl/certs/
       - /etc/letsencrypt/archive/gode.openmrs.org:/etc/archive/gode.openmrs.org
-      - ip_updater_logs:/var/logs/ip_updater/
+      - ip_updater_logs:/var/log/ip_updater/
 volumes:
   postgres_data:
     driver: local
