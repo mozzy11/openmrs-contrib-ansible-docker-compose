@@ -8,7 +8,7 @@ FORCE_RESTART=${3:-false}
 SERVICE=${4:-''}
 
 
-DOCKER_COMPOSE="docker compose"
+DOCKER_COMPOSE="docker-compose"
 
 cd /root/docker/$ENVIRONMENT
 
