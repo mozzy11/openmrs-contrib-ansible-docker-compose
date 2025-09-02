@@ -7,7 +7,12 @@ FORCE_RESTART=${4:-false}
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-DOCKER_COMPOSE="docker-compose"
+# Check if using old or new docker compose 
+if command -v docker-compose >/dev/null 2>&1; then
+    DOCKER_COMPOSE="docker-compose"
+else
+    DOCKER_COMPOSE="docker compose"
+fi
 
 for ENVIRONMENT in $ENVIRONMENTS; do
   echo "Running environment $ENVIRONMENT"
